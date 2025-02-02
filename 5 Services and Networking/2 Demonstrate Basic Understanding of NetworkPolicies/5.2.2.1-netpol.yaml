@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: febe
+  namespace: ps
+spec:
+  podSelector:
+    matchLabels:
+      app: be
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: fe
+    ports:
+    - protocol: TCP
+      port: 5432
